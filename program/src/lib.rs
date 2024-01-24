@@ -1,10 +1,10 @@
 pub mod instruction;
 pub mod state;
 
-use borsh::BorshSerialize;
 use crate::instruction::ReviewInstruction;
 use crate::state::AccountState;
 use crate::state::ReviewError;
+use borsh::BorshSerialize;
 use solana_program::{
     account_info::{next_account_info, AccountInfo},
     borsh0_10::try_from_slice_unchecked,
@@ -33,12 +33,14 @@ pub fn process_instruction(
             title,
             rating,
             description,
-        } => add_review(program_id, accounts, title, rating, description),
+            location,
+        } => add_review(program_id, accounts, title, rating, description, location),
         ReviewInstruction::UpdateReview {
             title,
             rating,
             description,
-        } => update_review(program_id, accounts, title, rating, description),
+            location,
+        } => update_review(program_id, accounts, title, rating, description, location),
     }
 }
 
@@ -48,11 +50,13 @@ pub fn add_review(
     title: String,
     rating: u8,
     description: String,
+    location: String,
 ) -> ProgramResult {
     msg!("Adding  review...");
     msg!("Title: {}", title);
     msg!("Rating: {}", rating);
     msg!("Description: {}", description);
+    msg!("Location: {}", location);
 
     let account_info_iter = &mut accounts.iter();
 
@@ -119,6 +123,7 @@ pub fn add_review(
     account_data.title = title;
     account_data.rating = rating;
     account_data.description = description;
+    account_data.location = location;
     account_data.is_initialized = true;
 
     msg!("serializing account");
@@ -134,6 +139,7 @@ pub fn update_review(
     _title: String,
     rating: u8,
     description: String,
+    location: String,
 ) -> ProgramResult {
     msg!("Updating  review...");
 
@@ -182,14 +188,17 @@ pub fn update_review(
     msg!("Title: {}", account_data.title);
     msg!("Rating: {}", account_data.rating);
     msg!("Description: {}", account_data.description);
+    msg!("Location: {}", account_data.location);
 
     account_data.rating = rating;
     account_data.description = description;
+    account_data.location = location;
 
     msg!("Review after update:");
     msg!("Title: {}", account_data.title);
     msg!("Rating: {}", account_data.rating);
     msg!("Description: {}", account_data.description);
+    msg!("Location: {}", account_data.location);
 
     msg!("serializing account");
     account_data.serialize(&mut &mut pda_account.data.borrow_mut()[..])?;

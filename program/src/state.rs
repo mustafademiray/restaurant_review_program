@@ -9,6 +9,7 @@ pub struct AccountState {
     pub rating: u8,
     pub description: String,
     pub title: String,
+    pub location: String,
 }
 
 impl Sealed for AccountState {}
