@@ -63,7 +63,7 @@ Welcome to the **Full-stack Solana DApp** project repository! This decentralized
 
 ## Usage
 
-1. Navigate to /frontend/src/pages/index.tsx and paste the Program ID we have got from the Playground.
+1. Navigate to /frontend/src/pages/index.tsx and replace the Program ID we have got from the Playground.
 
 2. Start the development server:
 
