@@ -33,13 +33,13 @@ pub fn process_instruction(
             title,
             rating,
             description,
-            location,
+            location, //new field
         } => add_review(program_id, accounts, title, rating, description, location),
         ReviewInstruction::UpdateReview {
             title,
             rating,
             description,
-            location,
+            location, //new field
         } => update_review(program_id, accounts, title, rating, description, location),
     }
 }

@@ -6,13 +6,13 @@ pub enum ReviewInstruction {
         title: String,
         rating: u8,
         description: String,
-        location: String,
+        location: String, //new field
     },
     UpdateReview {
         title: String,
         rating: u8,
         description: String,
-        location: String,
+        location: String, //new field
     },
 }
 
@@ -21,7 +21,7 @@ struct ReviewPayload {
     title: String,
     rating: u8,
     description: String,
-    location: String,
+    location: String, //new field
 }
 
 impl ReviewInstruction {
